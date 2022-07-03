@@ -1,5 +1,5 @@
 locals {
-  charts = { for i in var.charts : i.chart => merge(
+  charts = { for i in var.charts : lookup(i, "name", i.chart) => merge(
     i,
     {
       extras = merge(i, (contains(var.extras_injection_condition, i.chart) ? var.extras_payload : var.default_extras))
